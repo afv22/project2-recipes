@@ -47,7 +47,7 @@ def query_steps(ingredients, directions, tools, methods):
 		for w in tkn_direc:
 			for i in ingredients:
 				if w in i['name'].split(' '):
-					step['ingredients'].append(i)
+					step['ingredients'].append(i.copy())
 
 		step['ingredients'] = prune_list(step['ingredients'])
 

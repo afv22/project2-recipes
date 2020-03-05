@@ -6,3 +6,6 @@ lamb
 veal
 tenderloin
 venison
+ground beef
+ground pork
+ground veal

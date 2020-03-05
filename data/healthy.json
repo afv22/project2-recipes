@@ -9,8 +9,20 @@
     "brown rice"
   ],
   [
+    "eggs",
+    "egg whites"
+  ],
+  [
     "egg",
     "egg white"
+  ],
+  [
+    "egg yolk",
+    "egg"
+  ],
+  [
+    "egg yolks",
+    "eggs"
   ],
   [
     "pasta",
@@ -80,5 +92,13 @@
   [
     "orzo",
     "quinoa"
+  ],
+  [
+    "mozzarella cheese",
+    "low-fat mozzarella cheese"
+  ],
+  [
+    "noodles",
+    "whole wheat noodles"
   ]
 ]

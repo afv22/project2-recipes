@@ -45,12 +45,12 @@ def print_recipe(steps):
 
 		print('\tIngredients:')
 		for ingredient in step['ingredients']:
-			print('\t\t{} {} {} {}, {}'.format(
+			print('\t\t{} {} {} {}{}'.format(
 				ingredient['quantity'],
-				ingredient['measurement'],
+				ingredient['measurement'] if ingredient['measurement'] else '',
 				', '.join(ingredient['descriptor']),
 				ingredient['name'],
-				ingredient['preparation']
+				', ' + ', '.join(ingredient['preparation']) if len(ingredient['preparation']) else ''
 			))
 
 		print('\tMethods:')
@@ -71,3 +71,14 @@ def prune_list(l):
 		if i not in clean:
 			clean.append(i)
 	return clean
+
+def custom_replace_name(arr, old, new):
+	for n in range(len(arr)):
+		if arr[n]['name'] == old:
+			arr[n]['name'] = new
+
+def custom_replace_quantity(arr, old, new):
+	for n in range(len(arr)):
+		if arr[n]['quantity'] == old:
+			arr[n]['quantity'] = new
+			break

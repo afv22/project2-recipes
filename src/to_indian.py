@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import random
-from src.helpers import unibigrams
+from src.helpers import *
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.tokenize import TweetTokenizer
@@ -30,44 +30,39 @@ def to_indian(steps):
     
     for step in steps:
         for i in step['ingredients']:
-            name = word_tokenize(i)
+            name = word_tokenize(i['name'])
             if len(name) == 1:
                 if name[0] in spices:
-                    step['ingredients'] = list(map(lambda x: x if x != i else random.choice(indian_spices), step['ingredients']))
+                    custom_replace_name(step['ingredients'], i['name'], random.choice(indian_spices))
                 elif name[0] in sauces:
-                    step['ingredients'] = list(map(lambda x: x if x != i else random.choice(indian_sauces), step['ingredients']))
+                    custom_replace_name(step['ingredients'], i['name'], random.choice(indian_sauces))
                 elif name[0] == 'rice':
-                    step['ingredients'] = list(map(lambda x: x if x != i else 'basmati rice', step['ingredients']))
+                    custom_replace_name(step['ingredients'], i['name'], 'basmati rice')
                 elif name[0] in breads:
-                    step['ingredients'] = list(map(lambda x: x if x != i else 'naan', step['ingredients']))
+                    custom_replace_name(step['ingredients'], i['name'], 'naan')
                 elif name[0] in red_meats:
-                    step['ingredients'] = list(map(lambda x: x if x != i else 'chicken', step['ingredients']))
+                    custom_replace_name(step['ingredients'], i['name'], 'chicken')
                 elif name[0] in cheeses:
-                    step['ingredients'] = list(map(lambda x: x if x != i else 'paneer', step['ingredients']))
-                #else:
-                #    new_dict[key] = value
+                    custom_replace_name(step['ingredients'], i['name'], 'paneer')
             elif len(name) == 2:
                 if name in ans_spices['bigrams']:
-                    step['ingredients'] = list(map(lambda x: x if x != i else random.choice(indian_spices), step['ingredients']))
+                    custom_replace_name(step['ingredients'], i['name'], random.choice(indian_spices))
                 elif name in ans_sauces['bigrams']:
-                    step['ingredients'] = list(map(lambda x: x if x != i else random.choice(indian_sauces), step['ingredients']))
+                    custom_replace_name(step['ingredients'], i['name'], random.choice(indian_sauces))
                 elif name in ans_breads['bigrams']:
-                    step['ingredients'] = list(map(lambda x: x if x != i else 'naan', step['ingredients']))
+                    custom_replace_name(step['ingredients'], i['name'], 'naan')
                 elif name in ans_rm['bigrams']:
-                    step['ingredients'] = list(map(lambda x: x if x != i else 'chicken', step['ingredients']))
+                    custom_replace_name(step['ingredients'], i['name'], 'chicken')
                 elif name in ans_cheese['bigrams']:
-                    step['ingredients'] = list(map(lambda x: x if x != i else 'paneer', step['ingredients']))
-               # else:
-               #     new_dict[key] = value
+                    custom_replace_name(step['ingredients'], i['name'], 'paneer')
             elif len(name) == 3:
                 if name in ans_spices['trigrams']:
-                    step['ingredients'] = list(map(lambda x: x if x != i else random.choice(indian_spices), step['ingredients']))
+                    custom_replace_name(step['ingredients'], i['name'], random.choice(indian_spices))
                 elif name in ans_sauces['trigrams']:
-                    step['ingredients'] = list(map(lambda x: x if x != i else random.choice(indian_sauces), step['ingredients']))
+                    custom_replace_name(step['ingredients'], i['name'], random.choice(indian_sauces))
                 elif name in ans_breads['trigrams']:
-                    step['ingredients'] = list(map(lambda x: x if x != i else 'naan', step['ingredients']))
+                    custom_replace_name(step['ingredients'], i['name'], 'naan')
                 elif name in ans_rm['trigrams']:
-                    step['ingredients'] = list(map(lambda x: x if x != i else 'chicken', step['ingredients']))
+                    custom_replace_name(step['ingredients'], i['name'], 'chicken')
                 elif name in ans_cheese['trigrams']:
-                    step['ingredients'] = list(map(lambda x: x if x != i else 'paneer', step['ingredients']))
-    return steps
+                    custom_replace_name(step['ingredients'], i['name'], 'paneer')

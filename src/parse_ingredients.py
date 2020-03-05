@@ -44,9 +44,9 @@ def parse_ingredients(ingredients):
 		prep = get_prep(name, i, measurement)
 
 		parsed_ingredients.append({
-			'name': str(n.strip(' ')),
+			'name': n.strip(' '),
 			'quantity': str(quantity),
-			'measurement': str(measurement),
+			'measurement': measurement,
 			'descriptor': pos,
 			'preparation': prep
 		})
@@ -54,15 +54,12 @@ def parse_ingredients(ingredients):
 	return parsed_ingredients
 
 def get_measurement(ingred, quantity):
-	quanity_index = ingred.index(quantity)
-	if quanity_index == len(ingred) - 1:
-		return
-
 	units = ['package', 'slice', 'container', 'litre', 'gallon', 'quart', 'stalk', 'cup', 'pint', 'jar', 'can', 'clove', 'ounce', 'spoon', 'gram', 'pound', 'pinch', 'teaspoon', 'tablespoon', 'tsp', 'tbsp']
 
 	for unit in units:
-		if unit in ingred[quanity_index + 1]:
-			return ingred[quanity_index + 1]
+		for i in ingred:
+			if unit in i:
+				return i
 
 def get_name(ingred, m):
 	try:

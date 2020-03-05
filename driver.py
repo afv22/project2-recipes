@@ -9,6 +9,9 @@ from src.query_steps import query_steps
 
 from src.change_health import change_health
 from src.to_indian import to_indian
+from src.to_med import to_mediterranean
+
+from src.supplemental_project2 import *
 
 from src.helpers import *
 
@@ -25,25 +28,39 @@ def main():
 	tools = query_tools(ingredients, recipe_data['directions'])
 
 	steps = query_steps(ingredients, recipe_data['directions'], tools, methods['methods'])
-	print_recipe(steps)
 
-	transform = input('\nPlease enter the number of your desired transformation:\n'
+	print('\nPlease enter the number of your desired transformation:\n'
 		'1: Healthier\n'
 		'2: Unhealthier\n'
 		'3: Vegetarian\n'
 		'4: Non-Vegetarian\n'
 		'5: Indian\n'
 		'6: Mediterranean\n'
-		'>> ')
+		'7: Double')
 
-	if transform == '1':
-		new_recipe = change_health(True, steps)
-	elif transform == '2':
-		new_recipe = change_health(False, steps)
-	elif transform == '5':
-		new_recipe = to_indian(steps)
+	while True:
+		transform = input('>> ')
+		if transform == '1':
+			change_health(True, steps)
+		elif transform == '2':
+			change_health(False, steps)
+		elif transform == '3':
+			make_veg(steps)
+		elif transform == '4':
+			make_meat(steps)
+		elif transform == '5':
+			to_indian(steps)
+		elif transform == '6':
+			to_mediterranean(steps)
+		elif transform == '7':
+			double_amount(steps)
+		else:
+			print('Invalid Input')
+			continue
 
-	print(new_recipe)
+		break
+
+	print_recipe(steps)
 
 	print('\nBon Appetit!')
 

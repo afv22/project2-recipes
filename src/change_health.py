@@ -3,7 +3,7 @@ import json
 
 from src.helpers import *
 
-def change_health(make_healthier, ingredients, directions):
+def change_health(make_healthier, steps):
 	with open('data/healthy.json', 'r') as f:
 		health_json = json.load(f)
 	f.close()
@@ -18,12 +18,7 @@ def change_health(make_healthier, ingredients, directions):
 
 	new_directions = []
 
-	for direction in directions:
-		new_direction = direction
-		for n in reversed(range(1, 5)):
-			for ngram in get_ngrams(n, tokenize_string(direction)):
-				if ngram.lower() in health_data.keys():
-					new_direction = new_direction.replace(ngram, health_data[ngram])
-		new_directions.append(new_direction)
-
-	return new_directions
+	for step in steps:
+		for i in step['ingredients']:
+			if i['name'] in health_data.keys():
+				custom_replace_name(step['ingredients'], i['name'], health_data[i['name']])
